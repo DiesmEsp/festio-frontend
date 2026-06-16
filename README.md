@@ -30,13 +30,28 @@ npm run preview
 Variable soportada:
 
 ```bash
-VITE_API_BASE_URL=http://127.0.0.1:8000
+VITE_API_BASE_URL=https://tu-backend.example.com
 ```
 
 Notas:
 
-- En desarrollo, `vite.config.ts` tambien define proxy para `/api` hacia `http://127.0.0.1:8000`.
+- Si `VITE_API_BASE_URL` no esta definida, el frontend usa rutas relativas `/api/*`.
+- En desarrollo, `vite.config.ts` define proxy para `/api` hacia `http://127.0.0.1:8000`.
 - El token de autenticacion se guarda en `localStorage` con la clave `festio_token`.
+
+## Despliegue En Vercel
+
+El proyecto ya incluye `vercel.json` con:
+
+- `outputDirectory: dist`
+- rewrites SPA para `/chat` y `/proveedor/*`
+
+Antes de desplegar en Vercel configura:
+
+1. `VITE_API_BASE_URL` apuntando a tu backend de produccion.
+2. CORS habilitado en el backend para tu dominio de Vercel.
+
+Si no defines `VITE_API_BASE_URL`, el frontend intentara consumir `/api/*` en el mismo dominio donde se despliegue.
 
 ## Rutas principales
 

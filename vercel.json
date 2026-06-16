@@ -1,0 +1,18 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/chat",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/proveedor",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/proveedor/:path*",
+      "destination": "/index.html"
+    }
+  ]
+}
