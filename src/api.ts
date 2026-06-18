@@ -1,14 +1,18 @@
 import type {
+  Categoria,
   ChatPayload,
   CheckoutClienteCreate,
   CheckoutReservaResponse,
   PreReservaPayload,
   PreReservaResponse,
+  ProveedorPerfil,
   RecomendacionResponse,
+  ResenaPublicaCreate,
+  ResenaPublicaOut,
   ServicioProducto,
 } from "./types";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL?.trim().replace(/\/$/, "") ?? "";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "http://127.0.0.1:8000";
 
 async function requestJson<T>(path: string, init: RequestInit): Promise<T> {
   const response = await fetch(`${API_BASE_URL}${path}`, {
@@ -72,5 +76,32 @@ export function checkoutSimulado(reservaTempId: string, datos: CheckoutClienteCr
 export function listarServiciosProveedor(proveedorId: number) {
   return requestJson<ServicioProducto[]>(`/api/catalogo/servicios?proveedor_id=${proveedorId}`, {
     method: "GET",
+  });
+}
+
+export function listarProveedores() {
+  return requestJson<ProveedorPerfil[]>("/api/proveedores/", {
+    method: "GET",
+  });
+}
+
+export function listarCategorias() {
+  return requestJson<Categoria[]>("/api/catalogo/categorias", {
+    method: "GET",
+  });
+}
+
+export function fetchResenas(proveedorId: number) {
+  return requestJson<ResenaPublicaOut[]>(`/api/resenas/proveedor/${proveedorId}`, {
+    method: "GET",
+  });
+}
+
+export function crearResena(datos: ResenaPublicaCreate) {
+  const token = localStorage.getItem("festio_token");
+  return requestJson<ResenaPublicaOut>("/api/resenas/publica", {
+    method: "POST",
+    headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+    body: JSON.stringify(datos),
   });
 }
