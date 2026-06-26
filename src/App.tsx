@@ -1,7 +1,9 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { ClienteApp } from "./ClienteApp";
 import { AuthModal } from "./components/AuthModal";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { LandingPage } from "./screens/LandingPage";
+import { useAuth } from "./hooks/useAuth";
 import type { RolUsuario } from "./types";
 
 // Pantallas B2B
@@ -16,6 +18,20 @@ import { OperacionesScreen } from "./screens/proveedor/OperacionesScreen";
 import { FinanzasScreen } from "./screens/proveedor/FinanzasScreen";
 import { MetricasScreen } from "./screens/proveedor/MetricasScreen";
 
+function LandingPageWrapper() {
+  const { openAuthModal } = useAuth();
+  const navigate = useNavigate();
+
+  return (
+    <LandingPage
+      onLoginClick={() => openAuthModal("login")}
+      onRegisterClick={() => openAuthModal("register")}
+      onCTAClick={() => navigate("/chat")}
+      onProviderRegisterClick={() => openAuthModal("register")}
+    />
+  );
+}
+
 export default function App() {
   return (
     <>
@@ -23,8 +39,10 @@ export default function App() {
       <AuthModal />
 
       <Routes>
-        {/* Chat público — accesible sin login */}
-        <Route path="/" element={<ClienteApp />} />
+        {/* Landing Page — pantalla principal */}
+        <Route path="/" element={<LandingPageWrapper />} />
+
+        {/* Chat / buscador de eventos */}
         <Route path="/chat" element={<ClienteApp />} />
 
         {/* Rutas proveedor — Panel B2B protegidas por rol */}
@@ -46,7 +64,7 @@ export default function App() {
           </Route>
         </Route>
 
-        {/* 404 genérico → al chat */}
+        {/* 404 genérico → al landing */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
