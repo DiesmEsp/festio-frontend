@@ -48,7 +48,6 @@ export function ClienteApp() {
   return (
     <div className={`app-shell screen-${screen}`}>
       <AppHeader
-        onLogoClick={() => setScreen("chat")}
         onReservasClick={() => setScreen("reservas")}
       />
 

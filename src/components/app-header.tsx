@@ -1,14 +1,13 @@
 import { Sparkles, LogOut, LayoutDashboard } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 type AppHeaderProps = {
-  onLogoClick: () => void;
   onReservasClick?: () => void;
   subtitle?: string;
 };
 
-export function AppHeader({ onLogoClick, onReservasClick, subtitle }: AppHeaderProps) {
+export function AppHeader({ onReservasClick, subtitle }: AppHeaderProps) {
   const { isAuthenticated, user, logout, openAuthModal } = useAuth();
   const navigate = useNavigate();
 
@@ -19,7 +18,11 @@ export function AppHeader({ onLogoClick, onReservasClick, subtitle }: AppHeaderP
 
   return (
     <header className="app-header">
-      <button className="brand-button" type="button" onClick={onLogoClick}>
+      <Link
+        to="/"
+        className="brand-button select-none cursor-pointer transition-transform hover:scale-105 active:scale-95"
+        aria-label="Festio - Inicio"
+      >
         <span className="brand-icon">
           <Sparkles size={18} />
         </span>
@@ -27,7 +30,7 @@ export function AppHeader({ onLogoClick, onReservasClick, subtitle }: AppHeaderP
           <span>Festio</span>
           {subtitle ? <small>{subtitle}</small> : null}
         </div>
-      </button>
+      </Link>
 
       <nav className="header-actions">
         {isAuthenticated ? (
