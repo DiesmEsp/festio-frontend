@@ -37,7 +37,7 @@ export function LandingPage({
   return (
     <div className="min-h-screen bg-white">
       {/* ── Navbar ─────────────────────────────────────────────────────── */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-100">
+      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-2xl border-b border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Logo */}
           <Link
@@ -105,9 +105,48 @@ export function LandingPage({
 
       {/* ── Hero Section ────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-white">
-        {/* Subtle gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-purple-50/80 via-white to-white pointer-events-none" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[500px] w-[800px] rounded-full bg-purple-400/5 blur-3xl pointer-events-none" />
+        {/* 1. Textura de puntos (Dot Grid) */}
+        <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
+
+        {/* Animaciones CSS inyectadas para los globos abstractos */}
+        <style>
+          {`
+            @keyframes float-up {
+              0% { transform: translateY(0) translateX(0) rotate(-10deg); opacity: 0; }
+              10% { opacity: 0.9; }
+              90% { opacity: 0.9; }
+              100% { transform: translateY(-100vh) translateX(60px) rotate(20deg); opacity: 0; }
+            }
+            .balloon-1 { animation: float-up 15s linear infinite; }
+            .balloon-2 { animation: float-up 18s linear infinite 3s; }
+            .balloon-3 { animation: float-up 14s linear infinite 6s; }
+            .balloon-4 { animation: float-up 20s linear infinite 9s; }
+            .balloon-5 { animation: float-up 16s linear infinite 12s; }
+            .balloon-6 { animation: float-up 19s linear infinite 2s; }
+            .balloon-7 { animation: float-up 22s linear infinite 7s; }
+            .balloon-8 { animation: float-up 17s linear infinite 14s; }
+          `}
+        </style>
+
+        {/* 2. Globos flotantes (Abstractos y vibrantes en Glassmorphism) */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Globo 1 */}
+          <div className="balloon-1 absolute -bottom-[30%] left-[10%] h-40 w-32 rounded-[45%] bg-gradient-to-tr from-purple-500/60 to-purple-300/60 backdrop-blur-md border border-white/50 shadow-xl shadow-purple-500/20" />
+          {/* Globo 2 */}
+          <div className="balloon-2 absolute -bottom-[40%] left-[85%] h-52 w-40 rounded-[45%] bg-gradient-to-tr from-[#8B5CF6]/70 to-purple-400/60 backdrop-blur-md border border-white/50 shadow-xl shadow-purple-500/20" />
+          {/* Globo 3 */}
+          <div className="balloon-3 absolute -bottom-[20%] left-[45%] h-32 w-24 rounded-[45%] bg-gradient-to-tr from-fuchsia-400/60 to-purple-300/60 backdrop-blur-md border border-white/50 shadow-xl shadow-fuchsia-500/20" />
+          {/* Globo 4 */}
+          <div className="balloon-4 absolute -bottom-[35%] left-[65%] h-48 w-36 rounded-[45%] bg-gradient-to-tr from-[#6D28D9]/60 to-purple-500/50 backdrop-blur-md border border-white/40 shadow-xl shadow-purple-500/20" />
+          {/* Globo 5 */}
+          <div className="balloon-5 absolute -bottom-[25%] left-[25%] h-24 w-20 rounded-[45%] bg-gradient-to-tr from-purple-500/70 to-purple-300/60 backdrop-blur-md border border-white/50 shadow-xl shadow-purple-500/20" />
+          {/* Globo 6 (Nuevo) */}
+          <div className="balloon-6 absolute -bottom-[30%] left-[5%] h-36 w-28 rounded-[45%] bg-gradient-to-tr from-fuchsia-500/60 to-pink-300/50 backdrop-blur-md border border-white/50 shadow-xl shadow-pink-500/20" />
+          {/* Globo 7 (Nuevo) */}
+          <div className="balloon-7 absolute -bottom-[45%] left-[55%] h-44 w-32 rounded-[45%] bg-gradient-to-tr from-violet-500/60 to-purple-300/60 backdrop-blur-md border border-white/50 shadow-xl shadow-violet-500/20" />
+          {/* Globo 8 (Nuevo) */}
+          <div className="balloon-8 absolute -bottom-[20%] left-[75%] h-28 w-24 rounded-[45%] bg-gradient-to-tr from-purple-400/70 to-fuchsia-300/60 backdrop-blur-md border border-white/50 shadow-xl shadow-purple-500/20" />
+        </div>
 
         <div className="relative mx-auto max-w-4xl px-4 pb-16 pt-6 text-center sm:px-6 sm:pt-8 lg:px-8">
           {/* Badge */}
