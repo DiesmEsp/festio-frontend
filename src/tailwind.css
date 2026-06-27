@@ -6,6 +6,9 @@
  */
 
 @theme {
+  --font-hero: "Bricolage Grotesque", sans-serif;
+  --font-body: "Space Grotesk", sans-serif;
+
   --color-background: hsl(260 30% 98.5%);
   --color-foreground: hsl(245 30% 13%);
 
