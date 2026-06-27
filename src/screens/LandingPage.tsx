@@ -40,7 +40,7 @@ export function LandingPage({
   return (
     <div className="min-h-screen bg-white">
       {/* ── Navbar ─────────────────────────────────────────────────────── */}
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-2xl border-b border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+      <header className="sticky top-0 z-10 bg-white/90 backdrop-blur-2xl border-b border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Logo */}
           <Link
