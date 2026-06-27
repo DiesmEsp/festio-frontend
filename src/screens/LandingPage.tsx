@@ -55,9 +55,13 @@ export function LandingPage({
 
           {/* Desktop nav */}
           <nav className="hidden items-center gap-3 md:flex">
-            <Button variant="ghost" onClick={onLoginClick}>
+            <button
+              type="button"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium h-9 px-4 py-2 text-slate-700 hover:text-[#6D28D9] hover:bg-purple-50 transition-colors"
+              onClick={onLoginClick}
+            >
               Iniciar sesión
-            </Button>
+            </button>
             <Button
               className="bg-[#6D28D9] hover:bg-[#5B21B6] text-white shadow-md shadow-purple-500/20 hover:shadow-lg hover:shadow-purple-500/30 transition-all"
               onClick={onRegisterClick}
@@ -81,9 +85,13 @@ export function LandingPage({
         {mobileMenuOpen ? (
           <div className="border-t border-slate-100 bg-white px-4 pb-4 pt-3 md:hidden">
             <div className="flex flex-col gap-2">
-              <Button variant="ghost" className="justify-start" onClick={onLoginClick}>
+              <button
+                type="button"
+                className="inline-flex items-center justify-start gap-2 whitespace-nowrap rounded-md text-sm font-medium h-9 px-4 py-2 text-slate-700 hover:text-[#6D28D9] hover:bg-purple-50 transition-colors"
+                onClick={onLoginClick}
+              >
                 Iniciar sesión
-              </Button>
+              </button>
               <Button
                 className="bg-[#6D28D9] hover:bg-[#5B21B6] text-white justify-start"
                 onClick={onRegisterClick}
@@ -101,9 +109,9 @@ export function LandingPage({
         <div className="absolute inset-0 bg-gradient-to-b from-purple-50/80 via-white to-white pointer-events-none" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[500px] w-[800px] rounded-full bg-purple-400/5 blur-3xl pointer-events-none" />
 
-        <div className="relative mx-auto max-w-4xl px-4 pb-24 pt-20 text-center sm:px-6 lg:px-8">
+        <div className="relative mx-auto max-w-4xl px-4 pb-16 pt-6 text-center sm:px-6 sm:pt-8 lg:px-8">
           {/* Badge */}
-          <div className="mb-8 flex justify-center">
+          <div className="mb-6 flex justify-center">
             <Badge
               variant="secondary"
               className="gap-2 rounded-full border-purple-200 bg-purple-50 px-4 py-1.5 text-sm font-semibold text-[#6D28D9]"
@@ -114,22 +122,29 @@ export function LandingPage({
           </div>
 
           {/* Heading */}
-          <h1 className="mx-auto max-w-3xl text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
-            Tu evento ideal,{" "}
-            <span className="bg-gradient-to-r from-[#6D28D9] to-[#8B5CF6] bg-clip-text text-transparent">
-              diseñado de forma inteligente
-            </span>{" "}
-            y sin estrés.
-          </h1>
+          <div className="flex w-full justify-center">
+            <h1 className="max-w-4xl text-center text-4xl font-extrabold tracking-tight leading-tight text-slate-900 sm:text-5xl">
+              Tu evento ideal,
+              <br className="hidden sm:block" />
+              <span className="bg-gradient-to-r from-[#6D28D9] to-[#8B5CF6] bg-clip-text text-transparent">
+                diseñado de forma inteligente
+              </span>
+              <br className="hidden sm:block" />
+              y sin estrés.
+            </h1>
+          </div>
 
           {/* Subtitle */}
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-500 sm:text-xl">
-            Cuéntale a Festio qué tipo de evento necesitas y nuestra IA buscará las
-            mejores opciones con disponibilidad en tiempo real.
-          </p>
+          <div className="mt-6 flex w-full justify-center">
+            <p className="max-w-2xl text-center text-lg leading-relaxed text-slate-500 sm:text-xl">
+              Cuéntale a Festio qué tipo de evento necesitas y nuestra IA
+              <br className="hidden sm:block" />
+              buscará las mejores opciones con disponibilidad en tiempo real.
+            </p>
+          </div>
 
           {/* CTA */}
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button
               size="lg"
               className="h-12 rounded-xl bg-[#6D28D9] px-8 text-base font-bold text-white shadow-lg shadow-purple-500/25 transition-all hover:bg-[#5B21B6] hover:shadow-xl hover:shadow-purple-500/30 hover:-translate-y-0.5"
@@ -141,7 +156,7 @@ export function LandingPage({
           </div>
 
           {/* Trust indicators */}
-          <div className="mt-16 flex flex-wrap items-center justify-center gap-6 text-sm font-medium text-slate-400">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm font-medium text-slate-400">
             <span className="flex items-center gap-1.5">
               <Star size={14} className="text-amber-400 fill-amber-400" />
               +500 eventos realizados
