@@ -2364,4 +2364,16 @@ input[readonly] {
 .status-cancelada {
   background: #fee2e2;
   color: var(--coral);
+}
+
+/* ── 17. SCROLLBAR OCULTO ──────────────────────────────────────────────────── */
+/* Oculta la barra de desplazamiento global (manteniendo la funcionalidad de scroll) */
+html, body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
