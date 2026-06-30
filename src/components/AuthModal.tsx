@@ -371,65 +371,75 @@ export function AuthModal() {
   };
 
   return (
-    <div className="modal-backdrop" role="presentation" onClick={handleClose}>
-      <section
-        className="auth-modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="auth-modal-title"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          id="auth-modal-close"
-          className="close-button"
-          type="button"
-          onClick={handleClose}
+    <>
+      {/* Overlay — cubre toda la ventana, incluyendo el header */}
+      <div
+        className="fixed inset-0 z-[1000] bg-black/35 backdrop-blur-md"
+        role="presentation"
+        onClick={handleClose}
+      />
+
+      {/* Contenedor del modal — centrado, por encima del overlay */}
+      <div className="fixed inset-0 z-[1001] flex items-center justify-center p-4 pointer-events-none">
+        <section
+          className="pointer-events-auto auth-modal relative w-full max-w-md bg-white rounded-3xl shadow-2xl max-h-[90vh] overflow-y-auto"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="auth-modal-title"
+          onClick={(e) => e.stopPropagation()}
         >
-          <X size={20} />
-        </button>
+          <button
+            id="auth-modal-close"
+            className="close-button"
+            type="button"
+            onClick={handleClose}
+          >
+            <X size={20} />
+          </button>
 
-        <div className="auth-modal-head">
-          {!isLogin && registerRol ? (
-            <button
-              className="auth-back-button"
-              type="button"
-              onClick={handleBackToRolSelector}
-            >
-              <ArrowLeft size={16} />
-              Cambiar tipo de cuenta
-            </button>
-          ) : null}
+          <div className="auth-modal-head">
+            {!isLogin && registerRol ? (
+              <button
+                className="auth-back-button"
+                type="button"
+                onClick={handleBackToRolSelector}
+              >
+                <ArrowLeft size={16} />
+                Cambiar tipo de cuenta
+              </button>
+            ) : null}
 
-          <h2 id="auth-modal-title">
-            {isLogin
-              ? "Bienvenido de vuelta"
-              : registerRol === "CLIENTE"
-                ? "Crea tu cuenta"
-                : registerRol === "PROVEEDOR"
-                  ? "Registro de Proveedor"
-                  : "Únete a Festio"}
-          </h2>
-          <p>
-            {isLogin
-              ? "Inicia sesión para continuar"
-              : registerRol
-                ? registerRol === "CLIENTE"
-                  ? "Completa tus datos para empezar"
-                  : "Registra tu empresa y empieza a ofrecer servicios"
-                : "Selecciona tu tipo de cuenta"}
-          </p>
-        </div>
+            <h2 id="auth-modal-title">
+              {isLogin
+                ? "Bienvenido de vuelta"
+                : registerRol === "CLIENTE"
+                  ? "Crea tu cuenta"
+                  : registerRol === "PROVEEDOR"
+                    ? "Registro de Proveedor"
+                    : "Únete a Festio"}
+            </h2>
+            <p>
+              {isLogin
+                ? "Inicia sesión para continuar"
+                : registerRol
+                  ? registerRol === "CLIENTE"
+                    ? "Completa tus datos para empezar"
+                    : "Registra tu empresa y empieza a ofrecer servicios"
+                  : "Selecciona tu tipo de cuenta"}
+            </p>
+          </div>
 
-        {isLogin ? (
-          <LoginForm onClose={handleClose} />
-        ) : registerRol === "CLIENTE" ? (
-          <ClienteRegisterForm onClose={handleClose} />
-        ) : registerRol === "PROVEEDOR" ? (
-          <ProveedorRegisterForm onClose={handleClose} />
-        ) : (
-          <RolSelector onSelect={setRegisterRol} />
-        )}
-      </section>
-    </div>
+          {isLogin ? (
+            <LoginForm onClose={handleClose} />
+          ) : registerRol === "CLIENTE" ? (
+            <ClienteRegisterForm onClose={handleClose} />
+          ) : registerRol === "PROVEEDOR" ? (
+            <ProveedorRegisterForm onClose={handleClose} />
+          ) : (
+            <RolSelector onSelect={setRegisterRol} />
+          )}
+        </section>
+      </div>
+    </>
   );
 }
