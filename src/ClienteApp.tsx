@@ -102,8 +102,11 @@ export function ClienteApp() {
           user={user}
           loadingPayment={payment.loadingPayment}
           error={payment.error}
-          onSubmit={(e, metodoPago) =>
-            payment.submitPayment(e, booking.eventDraft.direccion, metodoPago)
+          onConfirm={(metodoPago) =>
+            payment.iniciarPagoMP({
+              tituloEvento: booking.selectedProvider?.paquete.nombre ?? "Reserva",
+              metodoPago,
+            })
           }
           onClose={() => payment.setPaymentOpen(false)}
         />

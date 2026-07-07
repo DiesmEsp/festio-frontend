@@ -1,7 +1,6 @@
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import { CreditCard, Loader2, X, CheckCircle } from "lucide-react";
 import { PaymentMethodSelect } from "../components/payment-method-select";
-import { PaymentDetailsForm, type PaymentDetailsData } from "../components/payment-details-form";
 import { money } from "../lib/format";
 import type { AuthUser, PreReservaResponse } from "../types";
 
@@ -10,7 +9,7 @@ type PaymentModalProps = {
   user: AuthUser;
   loadingPayment: boolean;
   error: string | null;
-  onSubmit: (event: FormEvent<HTMLFormElement>, metodoPago: string) => void;
+  onConfirm: (metodoPago: string) => void;
   onClose: () => void;
 };
 
@@ -19,16 +18,10 @@ export function PaymentModal({
   user,
   loadingPayment,
   error,
-  onSubmit,
+  onConfirm,
   onClose,
 }: PaymentModalProps) {
   const [metodoPago, setMetodoPago] = useState("TARJETA");
-  const [paymentDetails, setPaymentDetails] = useState<PaymentDetailsData>({});
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onSubmit(e, metodoPago);
-  };
 
   return (
     <div className="modal-backdrop" role="presentation">
@@ -44,14 +37,14 @@ export function PaymentModal({
 
         {error && <p className="inline-error">{error}</p>}
 
-        <form className="auth-form" onSubmit={handleSubmit}>
+        <div className="auth-form">
           <div className="auth-user-summary">
             <div className="auth-user-avatar">
               {(user.nombre.charAt(0) || "C").toUpperCase()}
             </div>
             <div className="auth-user-details">
               <strong>{user.nombre} {user.apellido}</strong>
-              <span><CheckCircle size={12} style={{ display: "inline", verticalAlign: "middle" }} /> Sesión activa</span>
+              <span><CheckCircle size={12} style={{ display: "inline", verticalAlign: "middle" }} /> Sesion activa</span>
             </div>
           </div>
 
@@ -60,17 +53,16 @@ export function PaymentModal({
             onChange={setMetodoPago}
           />
 
-          <PaymentDetailsForm
-            metodoPago={metodoPago}
-            details={paymentDetails}
-            onChange={setPaymentDetails}
-          />
-
-          <button className="primary-action wide-field" type="submit" disabled={loadingPayment}>
+          <button
+            className="primary-action wide-field"
+            type="button"
+            disabled={loadingPayment}
+            onClick={() => onConfirm(metodoPago)}
+          >
             {loadingPayment ? <Loader2 className="spin" size={18} /> : <CreditCard size={18} />}
-            Confirmar pago
+            Ir a pagar con Mercado Pago
           </button>
-        </form>
+        </div>
       </section>
     </div>
   );

@@ -8,6 +8,7 @@ export function PaymentMethodSelect({ value, onChange }: PaymentMethodSelectProp
     <label className="wide-field">
       <span>Método de pago</span>
       <select value={value} onChange={(event) => onChange(event.target.value)}>
+        <option value="MERCADOPAGO">Mercado Pago</option>
         <option value="TARJETA">Tarjeta</option>
         <option value="YAPE">Yape</option>
         <option value="PLIN">Plin</option>

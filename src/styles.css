@@ -1579,6 +1579,67 @@ input[readonly] {
   border-color: var(--primary-light);
 }
 
+/* ── 10b. PAGO STATUS SCREENS ─────────────────────────────────────────────── */
+
+.status-icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+}
+
+.status-icon--error {
+  background: #fef2f2;
+  color: #ef4444;
+}
+
+.status-icon--pending {
+  background: #fffbeb;
+  color: var(--orange);
+}
+
+.status-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  color: white;
+}
+
+.status-banner small {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.8;
+}
+
+.status-banner strong {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.status-banner--error {
+  background: #ef4444;
+}
+
+.status-banner--pending {
+  background: var(--orange);
+}
+
+.text-green {
+  color: var(--green) !important;
+}
+
+.text-muted {
+  color: var(--muted) !important;
+}
+
 /* ── 11. AUTH MODAL ────────────────────────────────────────────────────────── */
 .auth-modal {
   position: relative;

@@ -3,6 +3,10 @@ import { ClienteApp } from "./ClienteApp";
 import { AuthModal } from "./components/AuthModal";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { LandingPage } from "./screens/LandingPage";
+import { PagoExitosoScreen } from "./screens/PagoExitosoScreen";
+import { PagoFallidoScreen } from "./screens/PagoFallidoScreen";
+import { PagoPendienteScreen } from "./screens/PagoPendienteScreen";
+import { ComprobanteScreen } from "./screens/ComprobanteScreen";
 import { useAuth } from "./hooks/useAuth";
 import type { RolUsuario } from "./types";
 
@@ -44,6 +48,12 @@ export default function App() {
 
         {/* Chat / buscador de eventos */}
         <Route path="/chat" element={<ClienteApp />} />
+
+        {/* Mercado Pago post-pago */}
+        <Route path="/pago-exitoso" element={<PagoExitosoScreen />} />
+        <Route path="/pago-fallido" element={<PagoFallidoScreen />} />
+        <Route path="/pago-pendiente" element={<PagoPendienteScreen />} />
+        <Route path="/comprobante/:reserva_id" element={<ComprobanteScreen />} />
 
         {/* Rutas proveedor — Panel B2B protegidas por rol */}
         <Route path="/proveedor" element={<ProtectedRoute rol="PROVEEDOR" />}>

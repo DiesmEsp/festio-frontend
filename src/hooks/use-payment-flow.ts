@@ -1,5 +1,6 @@
-import { type FormEvent, useState } from "react";
-import { checkoutSimulado, prebloquearReserva } from "../api";
+import { useState } from "react";
+import { prebloquearReserva } from "../api";
+import { pagosService } from "../services/pagosService";
 import {
   cleanNumber,
   inferEventType,
@@ -72,32 +73,42 @@ export function usePaymentFlow({ onSuccess }: { onSuccess: () => void }) {
     }
   }
 
-  async function submitPayment(
-    event: FormEvent<HTMLFormElement>,
-    direccion: string,
-    metodoPago: string,
-  ) {
-    event.preventDefault();
+  async function iniciarPagoMP(params: {
+    tituloEvento: string;
+    metodoPago: string;
+  }) {
     if (!preReserva) return;
-
-    const payload = {
-      direccion,
-      metodo_pago: metodoPago,
-    };
 
     setLoadingPayment(true);
     setError(null);
 
     try {
-      const response = await checkoutSimulado(preReserva.reserva_temp_id, payload);
-      setConfirmation(response);
+      const response = await pagosService.iniciarPago({
+        tipo_pago: "ADELANTO_ONLINE",
+        monto: preReserva.monto_adelanto,
+        metodo_pago: params.metodoPago,
+        titulo_evento: params.tituloEvento,
+        reserva_temp_id: preReserva.reserva_temp_id,
+        codigo_transaccion: null,
+      });
+
       setPaymentOpen(false);
-      onSuccess();
+      window.location.href = response.url_pago;
     } catch (apiError) {
       setError(readError(apiError));
     } finally {
       setLoadingPayment(false);
     }
+  }
+
+  async function submitPayment(
+    direccion: string,
+    metodoPago: string,
+  ) {
+    iniciarPagoMP({
+      tituloEvento: "",
+      metodoPago,
+    });
   }
 
   return {
@@ -108,6 +119,7 @@ export function usePaymentFlow({ onSuccess }: { onSuccess: () => void }) {
     loadingPayment,
     error,
     continueToPayment,
+    iniciarPagoMP,
     submitPayment,
   };
 }

@@ -359,6 +359,34 @@ export type MarketAnalyticsOut = {
   resenas_recientes: ResenaRecienteOut[];
 };
 
+// ─── Pagos (Mercado Pago) ───────────────────────────────────────────────────
+
+export type IniciarPagoPayload = {
+  tipo_pago: string;
+  monto: number;
+  metodo_pago: string;
+  titulo_evento: string;
+  reserva_temp_id: string;
+  codigo_transaccion?: string | null;
+};
+
+export type IniciarPagoResponse = {
+  url_pago: string;
+};
+
+export type ComprobantePagoResponse = {
+  reserva_id: number;
+  pago_id: number;
+  estado: string;
+  monto_total: number;
+  monto_adelanto: number;
+  monto_pendiente: number;
+  metodo_pago: string;
+  fecha_pago: string;
+  nombre_evento: string;
+  nombre_empresa: string;
+};
+
 // ─── UI State Types ──────────────────────────────────────────────────────────
 
 export type Screen = "chat" | "detail" | "success" | "reservas";
