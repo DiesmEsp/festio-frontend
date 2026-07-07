@@ -34,7 +34,7 @@ export function DashboardScreen() {
         {/* Card: Inventario */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col items-center justify-center space-y-2">
           <span className="text-4xl">📦</span>
-          <h3 className="text-lg font-medium text-gray-500">Servicios Activos</h3>
+          <h3 className="text-lg font-medium text-gray-500">Servicios y Adicionales</h3>
           <p className="text-4xl font-bold text-gray-900">{stats.total_servicios}</p>
           <Link to="/proveedor/inventario" className="text-primary hover:underline text-sm mt-2">
             Gestionar inventario →
@@ -44,18 +44,21 @@ export function DashboardScreen() {
         {/* Card: Paquetes */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col items-center justify-center space-y-2">
           <span className="text-4xl">🎁</span>
-          <h3 className="text-lg font-medium text-gray-500">Paquetes Armados</h3>
+          <h3 className="text-lg font-medium text-gray-500">Marcos de Eventos</h3>
           <p className="text-4xl font-bold text-gray-900">{stats.total_paquetes}</p>
           <Link to="/proveedor/paquetes" className="text-primary hover:underline text-sm mt-2">
-            Gestionar paquetes →
+            Gestionar marcos →
           </Link>
         </div>
 
         {/* Card: Reservas */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col items-center justify-center space-y-2">
           <span className="text-4xl">📅</span>
-          <h3 className="text-lg font-medium text-gray-500">Total Reservas</h3>
+          <h3 className="text-lg font-medium text-gray-500">Reservas Confirmadas</h3>
           <p className="text-4xl font-bold text-gray-900">{stats.total_reservas}</p>
+          <Link to="/proveedor/operaciones" className="text-primary hover:underline text-sm mt-2">
+            Ir a operaciones →
+          </Link>
         </div>
       </div>
     </div>

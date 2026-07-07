@@ -1,33 +1,66 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CalendarDays, Plus, Trash2, CalendarOff } from "lucide-react";
-
-type Bloqueo = {
-  id: string;
-  // Mapea a la tabla: ocupacion_global_proveedor (campos: fecha_inicio, fecha_fin)
-  fecha: string; 
-  motivo: string;
-};
+import { calendarioService } from "../../services/calendarioService";
+import type { BloqueoCalendario } from "../../types";
 
 export function CalendarioScreen() {
-  // Estado que simula la tabla: ocupacion_global_proveedor
-  const [bloqueos, setBloqueos] = useState<Bloqueo[]>([
-    { id: "1", fecha: "2026-07-15", motivo: "Mantenimiento de equipos" },
-    { id: "2", fecha: "2026-07-28", motivo: "Feriado Nacional" },
-  ]);
-
+  const [bloqueos, setBloqueos] = useState<BloqueoCalendario[]>([]);
   const [fecha, setFecha] = useState("");
   const [motivo, setMotivo] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    loadBloqueos();
+  }, []);
+
+  async function loadBloqueos() {
+    setLoading(true);
+    setError(null);
+    try {
+      const data = await calendarioService.listar();
+      setBloqueos(data);
+    } catch (err: any) {
+      setError(err.message || "No se pudieron cargar los bloqueos del calendario");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   const handleAdd = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!fecha) return;
-    setBloqueos([...bloqueos, { id: Date.now().toString(), fecha, motivo: motivo || "No especificado" }]);
-    setFecha("");
-    setMotivo("");
+    void submitAdd(e);
   };
 
-  const handleRemove = (id: string) => {
-    setBloqueos(bloqueos.filter(b => b.id !== id));
+  async function submitAdd(e: React.FormEvent) {
+    e.preventDefault();
+    if (!fecha) return;
+    setSaving(true);
+    setError(null);
+    try {
+      await calendarioService.crear({
+        fecha,
+        motivo: motivo.trim() || null,
+      });
+      setFecha("");
+      setMotivo("");
+      await loadBloqueos();
+    } catch (err: any) {
+      setError(err.message || "No se pudo guardar el bloqueo");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleRemove = async (fechaBloqueo: string) => {
+    if (!confirm("¿Seguro que deseas eliminar este bloqueo?")) return;
+    setError(null);
+    try {
+      await calendarioService.eliminar(fechaBloqueo);
+      await loadBloqueos();
+    } catch (err: any) {
+      setError(err.message || "No se pudo eliminar el bloqueo");
+    }
   };
 
   return (
@@ -38,6 +71,12 @@ export function CalendarioScreen() {
           <p className="text-slate-500 mt-1">Bloquea fechas para que no puedan ser reservadas por el Asistente Virtual.</p>
         </div>
       </div>
+
+      {error ? (
+        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+          {error}
+        </div>
+      ) : null}
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Formulario de Bloqueo */}
@@ -69,10 +108,11 @@ export function CalendarioScreen() {
             </div>
             <button 
               type="submit"
+              disabled={saving}
               className="w-full flex justify-center items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2.5 rounded-xl font-medium transition-colors shadow-md shadow-purple-600/20 mt-2"
             >
               <Plus size={18} />
-              Agregar Bloqueo
+              {saving ? "Guardando..." : "Agregar Bloqueo"}
             </button>
           </form>
         </div>
@@ -87,7 +127,11 @@ export function CalendarioScreen() {
           </div>
           
           <div>
-            {bloqueos.length === 0 ? (
+            {loading ? (
+              <div className="text-center py-12 text-sm text-slate-500">
+                Cargando bloqueos programados...
+              </div>
+            ) : bloqueos.length === 0 ? (
               <div className="text-center py-12">
                 <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <CalendarDays className="h-6 w-6 text-slate-300" />
@@ -106,13 +150,13 @@ export function CalendarioScreen() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
-                    {bloqueos.sort((a,b) => a.fecha.localeCompare(b.fecha)).map(b => (
-                      <tr key={b.id} className="hover:bg-slate-50/50 transition-colors">
+                    {bloqueos.map((b) => (
+                      <tr key={b.fecha} className="hover:bg-slate-50/50 transition-colors">
                         <td className="py-4 px-6 font-medium text-slate-900">{b.fecha}</td>
-                        <td className="py-4 px-6 text-slate-500 text-sm">{b.motivo}</td>
+                        <td className="py-4 px-6 text-slate-500 text-sm">{b.motivo || "Sin motivo"}</td>
                         <td className="py-4 px-6 text-right">
                           <button 
-                            onClick={() => handleRemove(b.id)}
+                            onClick={() => handleRemove(b.fecha)}
                             className="text-slate-400 hover:text-red-500 p-2 rounded-lg transition-colors hover:bg-red-50"
                             title="Eliminar bloqueo"
                           >

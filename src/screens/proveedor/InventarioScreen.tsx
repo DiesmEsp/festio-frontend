@@ -82,12 +82,15 @@ export function InventarioScreen() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-display font-bold text-gray-900">Mi Inventario</h1>
+        <div>
+          <h1 className="text-3xl font-display font-bold text-gray-900">Servicios y Adicionales</h1>
+          <p className="text-sm text-gray-500 mt-1">Todo item activo que no incluyas dentro de un marco de evento quedará disponible como adicional en el checkout.</p>
+        </div>
         <button
           onClick={() => setIsModalOpen(true)}
           className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors shadow-sm font-medium"
         >
-          + Agregar Servicio/Producto
+          + Registrar Servicio o Adicional
         </button>
       </div>
 
@@ -107,7 +110,7 @@ export function InventarioScreen() {
             {servicios.length === 0 ? (
               <tr>
                 <td colSpan={6} className="px-6 py-8 text-center text-gray-500">
-                  No tienes servicios en tu inventario aún.
+                  Aún no tienes servicios o adicionales activos en tu inventario.
                 </td>
               </tr>
             ) : (
@@ -141,7 +144,7 @@ export function InventarioScreen() {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-xl w-full max-w-2xl overflow-hidden">
             <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center bg-gray-50">
-              <h3 className="text-lg font-medium text-gray-900">Nuevo Item de Inventario</h3>
+              <h3 className="text-lg font-medium text-gray-900">Nuevo Servicio o Adicional</h3>
               <button onClick={() => setIsModalOpen(false)} className="text-gray-400 hover:text-gray-500 text-2xl">&times;</button>
             </div>
             
