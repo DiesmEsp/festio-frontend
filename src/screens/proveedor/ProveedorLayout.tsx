@@ -34,11 +34,10 @@ export function ProveedorLayout() {
               <Link
                 key={item.name}
                 to={item.path}
-                className={`flex items-center space-x-3 px-4 py-2.5 rounded-xl transition-all duration-200 ${
-                  isActive
-                    ? "bg-purple-600 text-white font-medium shadow-md shadow-purple-600/20"
-                    : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
-                }`}
+                className={`flex items-center space-x-3 px-4 py-2.5 rounded-xl transition-all duration-200 ${isActive
+                  ? "bg-purple-600 text-white font-medium shadow-md shadow-purple-600/20"
+                  : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
+                  }`}
               >
                 <span className={`${isActive ? "text-white" : "text-slate-400"}`}>{item.icon}</span>
                 <span className="text-sm">{item.name}</span>

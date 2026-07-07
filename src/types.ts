@@ -311,6 +311,29 @@ export type MisReservasItem = {
   detalles: MisReservasDetalle[];
 };
 
+export type ProveedorReservaDetalle = {
+  nombre: string;
+  tipo: string;
+  cantidad: number;
+  subtotal: number;
+};
+
+export type ProveedorReservaItem = {
+  reserva_id: number;
+  estado: string;
+  nombre_evento: string;
+  tipo_evento?: string | null;
+  fecha_evento_inicio: string;
+  fecha_evento_fin: string;
+  direccion: string;
+  nombre_cliente: string;
+  monto_total: number;
+  monto_adelanto: number;
+  monto_pendiente: number;
+  fecha_creacion: string;
+  detalles: ProveedorReservaDetalle[];
+};
+
 // ─── Reseñas ─────────────────────────────────────────────────────────────────
 
 export type ResenaPublicaCreate = {
