@@ -1,19 +1,21 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
-import { LayoutDashboard, Box, Package, User, CalendarDays, ClipboardCheck, Wallet, LineChart, LogOut, HelpCircle } from "lucide-react";
+import { LayoutDashboard, Box, Package, User, CalendarDays, ClipboardCheck, LogOut, HelpCircle } from "lucide-react";
+import { BarChart3 } from "lucide-react";
 
 export function ProveedorLayout() {
   const location = useLocation();
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
 
   const navItems = [
     { name: "Dashboard", path: "/proveedor/dashboard", icon: <LayoutDashboard size={20} /> },
-    { name: "Analytics", path: "/proveedor/metricas", icon: <LineChart size={20} /> },
+    { name: "Analytics", path: "/proveedor/metricas", icon: <BarChart3 size={20} /> },
     { name: "Event Logistics", path: "/proveedor/operaciones", icon: <ClipboardCheck size={20} /> },
-    { name: "Client Portal", path: "/proveedor/calendario", icon: <User size={20} /> },
-    { name: "Integrations", path: "/proveedor/paquetes", icon: <Box size={20} /> },
-    { name: "Settings", path: "/proveedor/perfil", icon: <Wallet size={20} /> },
+    { name: "Client Portal", path: "/proveedor/calendario", icon: <CalendarDays size={20} /> },
+    { name: "Servicios y Adicionales", path: "/proveedor/inventario", icon: <Box size={20} /> },
+    { name: "Marcos de Eventos", path: "/proveedor/paquetes", icon: <Package size={20} /> },
+    { name: "Perfil", path: "/proveedor/perfil", icon: <User size={20} /> },
   ];
 
   return (
@@ -34,11 +36,10 @@ export function ProveedorLayout() {
               <Link
                 key={item.name}
                 to={item.path}
-                className={`flex items-center space-x-3 px-4 py-2.5 rounded-xl transition-all duration-200 ${
-                  isActive
-                    ? "bg-purple-600 text-white font-medium shadow-md shadow-purple-600/20"
-                    : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
-                }`}
+                className={`flex items-center space-x-3 px-4 py-2.5 rounded-xl transition-all duration-200 ${isActive
+                  ? "bg-purple-600 text-white font-medium shadow-md shadow-purple-600/20"
+                  : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
+                  }`}
               >
                 <span className={`${isActive ? "text-white" : "text-slate-400"}`}>{item.icon}</span>
                 <span className="text-sm">{item.name}</span>
@@ -48,9 +49,9 @@ export function ProveedorLayout() {
         </nav>
 
         <div className="px-4 mt-8">
-          <button className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2.5 rounded-xl text-sm font-medium transition-colors shadow-md shadow-purple-600/20 mb-4">
-            Create New Event
-          </button>
+          <Link to="/proveedor/paquetes" className="block w-full bg-purple-600 hover:bg-purple-700 text-white py-2.5 rounded-xl text-sm font-medium transition-colors shadow-md shadow-purple-600/20 mb-4 text-center">
+            Crear Marco de Evento
+          </Link>
         </div>
 
         <div className="px-4 space-y-1 pt-4 border-t border-slate-100">

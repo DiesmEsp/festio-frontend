@@ -117,6 +117,29 @@ export type DashboardStats = {
   total_reservas: number;
 };
 
+export type BloqueoCalendario = {
+  fecha: string;
+  motivo?: string | null;
+  created_at: string;
+};
+
+export type EstadoOperativoEvento = "PENDIENTE" | "EN_CAMINO" | "EN_PROGRESO" | "FINALIZADO";
+
+export type ReservaOperativa = {
+  reserva_id: number;
+  evento_id: number;
+  estado_reserva: string;
+  estado_operativo: EstadoOperativoEvento;
+  estado_operativo_actualizado_at?: string | null;
+  cliente_nombre: string;
+  nombre_evento: string;
+  fecha_evento_inicio: string;
+  direccion: string;
+  puede_en_camino: boolean;
+  puede_iniciar_show: boolean;
+  puede_finalizar: boolean;
+};
+
 export type ProveedorPerfil = {
   id: number;
   usuario_id: number;
@@ -309,6 +332,29 @@ export type MisReservasItem = {
   monto_pendiente: number;
   fecha_creacion: string;
   detalles: MisReservasDetalle[];
+};
+
+export type ProveedorReservaDetalle = {
+  nombre: string;
+  tipo: string;
+  cantidad: number;
+  subtotal: number;
+};
+
+export type ProveedorReservaItem = {
+  reserva_id: number;
+  estado: string;
+  nombre_evento: string;
+  tipo_evento?: string | null;
+  fecha_evento_inicio: string;
+  fecha_evento_fin: string;
+  direccion: string;
+  nombre_cliente: string;
+  monto_total: number;
+  monto_adelanto: number;
+  monto_pendiente: number;
+  fecha_creacion: string;
+  detalles: ProveedorReservaDetalle[];
 };
 
 // ─── Reseñas ─────────────────────────────────────────────────────────────────
