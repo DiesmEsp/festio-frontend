@@ -3,7 +3,7 @@ import type { ProveedorReservaItem } from "../types";
 
 export const reservaProveedorService = {
   async getMisReservas(): Promise<ProveedorReservaItem[]> {
-    return requestAuthJson<ProveedorReservaItem[]>("/api/proveedor-reservas/mis-reservas", {
+    return requestAuthJson<ProveedorReservaItem[]>("/api/proveedor/reservas/mis-reservas", {
       method: "GET",
     });
   },
