@@ -1,5 +1,5 @@
 import { requestAuthJson } from "./apiClient";
-import type { ProveedorPerfil, DashboardStats } from "../types";
+import type { ProveedorPerfil, DashboardStats, MarketAnalyticsOut } from "../types";
 
 export const proveedorService = {
   async getMiPerfil(): Promise<ProveedorPerfil> {
@@ -17,6 +17,12 @@ export const proveedorService = {
 
   async getMiDashboard(): Promise<DashboardStats> {
     return requestAuthJson<DashboardStats>("/api/proveedores/mi-dashboard", {
+      method: "GET",
+    });
+  },
+
+  async getMiMarketAnalytics(): Promise<MarketAnalyticsOut> {
+    return requestAuthJson<MarketAnalyticsOut>("/api/proveedores/mi-market-analytics", {
       method: "GET",
     });
   },

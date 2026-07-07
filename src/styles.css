@@ -1899,6 +1899,13 @@ input[readonly] {
   padding: 0;
 }
 
+.filter-active-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
 .filter-toggle-btn {
   display: inline-flex;
   align-items: center;
@@ -1917,62 +1924,6 @@ input[readonly] {
   background: var(--primary-soft);
   border-color: var(--primary-light);
   color: var(--primary-dark);
-}
-
-.filter-panel-content {
-  position: absolute;
-  bottom: calc(100% + 8px);
-  left: 0;
-  width: 360px;
-  max-width: calc(100vw - 32px);
-  background: white;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--line);
-  padding: 16px;
-  z-index: 100;
-}
-
-.filter-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-}
-
-.filter-header h4 {
-  font-size: 0.95rem;
-  font-weight: 700;
-}
-
-.clear-filters-btn {
-  background: none;
-  border: none;
-  color: var(--muted);
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-
-.clear-filters-btn:hover {
-  color: var(--coral);
-}
-
-.filter-sections {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.filter-section-title {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--muted);
-  margin-bottom: 8px;
 }
 
 .filter-chips {
@@ -2028,28 +1979,7 @@ input[readonly] {
   color: var(--ink);
 }
 
-.card-reviews-container {
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px dashed var(--line);
-}
-
-.reviews-section {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.reviews-title {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--ink);
-}
-
-.review-form {
+.review-form-modal {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -2063,16 +1993,12 @@ input[readonly] {
   gap: 2px;
 }
 
-.review-stars-input {
-  display: flex;
-  gap: 4px;
-}
-
 .star-btn {
   background: none;
   border: none;
   color: var(--line);
   padding: 2px;
+  cursor: pointer;
 }
 
 .star-btn.active {
@@ -2118,12 +2044,15 @@ input[readonly] {
   background: var(--primary);
 }
 
-.reviews-list {
+.submit-review-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.reviews-list-modal {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-height: 300px;
-  overflow-y: auto;
 }
 
 .reviews-loading,
