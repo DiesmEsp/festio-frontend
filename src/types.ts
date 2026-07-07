@@ -328,6 +328,31 @@ export type ResenaPublicaOut = {
   nombre_usuario: string;
 };
 
+// ─── Market Analytics (Proveedor) ────────────────────────────────────────────
+
+export type TopPaqueteOut = {
+  paquete_id: number;
+  nombre: string;
+  ventas: number;
+  porcentaje: number;
+};
+
+export type ResenaRecienteOut = {
+  id: number;
+  cliente_nombre: string;
+  calificacion: number;
+  comentario: string | null;
+  fecha: string;
+};
+
+export type MarketAnalyticsOut = {
+  calificacion_promedio: number;
+  total_resenas: number;
+  distribucion_estrellas: Record<number, number>;
+  top_paquetes: TopPaqueteOut[];
+  resenas_recientes: ResenaRecienteOut[];
+};
+
 // ─── UI State Types ──────────────────────────────────────────────────────────
 
 export type Screen = "chat" | "detail" | "success" | "reservas";
