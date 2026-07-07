@@ -326,6 +326,12 @@ export type ResenaPublicaOut = {
   comentario?: string | null;
   fecha: string;
   nombre_usuario: string;
+  usuario_id?: number | null;
+};
+
+export type ResenaUpdate = {
+  calificacion?: number;
+  comentario?: string | null;
 };
 
 // ─── Market Analytics (Proveedor) ────────────────────────────────────────────

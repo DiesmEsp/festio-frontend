@@ -9,6 +9,7 @@ import type {
   RecomendacionResponse,
   ResenaPublicaCreate,
   ResenaPublicaOut,
+  ResenaUpdate,
   ServicioProducto,
   MisReservasItem,
 } from "./types";
@@ -115,5 +116,15 @@ export function fetchMisReservas() {
   return requestJson<MisReservasItem[]>("/api/reservas/mis-reservas", {
     method: "GET",
     headers: { Authorization: `Bearer ${token}` },
+  });
+}
+
+export function updateResena(resenaId: number, datos: ResenaUpdate) {
+  const token = localStorage.getItem("festio_token");
+  if (!token) throw new Error("No hay sesión activa");
+  return requestJson<ResenaPublicaOut>(`/api/resenas/${resenaId}`, {
+    method: "PATCH",
+    headers: { Authorization: `Bearer ${token}` },
+    body: JSON.stringify(datos),
   });
 }

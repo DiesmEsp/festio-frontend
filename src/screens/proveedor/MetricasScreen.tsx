@@ -22,9 +22,15 @@ export function MetricasScreen() {
     load();
   }, []);
 
+  const parseLocalDate = (iso: string): Date => {
+    const [datePart] = iso.split("T");
+    const [y, m, d] = datePart.split("-").map(Number);
+    return new Date(y, m - 1, d);
+  };
+
   const formatDate = (iso: string) => {
-    const d = new Date(iso);
-    const now = new Date();
+    const d = parseLocalDate(iso);
+    const now = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
     const diffMs = now.getTime() - d.getTime();
     const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
     if (diffDays === 0) return "Hoy";
