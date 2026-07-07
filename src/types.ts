@@ -117,6 +117,29 @@ export type DashboardStats = {
   total_reservas: number;
 };
 
+export type BloqueoCalendario = {
+  fecha: string;
+  motivo?: string | null;
+  created_at: string;
+};
+
+export type EstadoOperativoEvento = "PENDIENTE" | "EN_CAMINO" | "EN_PROGRESO" | "FINALIZADO";
+
+export type ReservaOperativa = {
+  reserva_id: number;
+  evento_id: number;
+  estado_reserva: string;
+  estado_operativo: EstadoOperativoEvento;
+  estado_operativo_actualizado_at?: string | null;
+  cliente_nombre: string;
+  nombre_evento: string;
+  fecha_evento_inicio: string;
+  direccion: string;
+  puede_en_camino: boolean;
+  puede_iniciar_show: boolean;
+  puede_finalizar: boolean;
+};
+
 export type ProveedorPerfil = {
   id: number;
   usuario_id: number;

@@ -155,19 +155,22 @@ export function PaquetesScreen() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-display font-bold text-gray-900">Mis Paquetes Armados</h1>
+        <div>
+          <h1 className="text-3xl font-display font-bold text-gray-900">Marcos de Eventos</h1>
+          <p className="text-sm text-gray-500 mt-1">Crea propuestas como Halloween Pirañas o Princesita Sofía combinando los servicios y productos de tu inventario.</p>
+        </div>
         <button
           onClick={() => setIsModalOpen(true)}
           className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors shadow-sm font-medium"
         >
-          + Armar Paquete Nuevo
+          + Crear Marco de Evento
         </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {paquetes.length === 0 ? (
           <div className="col-span-full bg-white rounded-xl shadow-sm border border-gray-100 p-8 text-center text-gray-500">
-            No tienes paquetes armados. Empieza combinando tus servicios de inventario.
+            No tienes marcos de eventos creados. Empieza combinando tu inventario para ofrecer experiencias temáticas.
           </div>
         ) : (
           paquetes.map((p) => {
@@ -211,14 +214,14 @@ export function PaquetesScreen() {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-xl w-full max-w-4xl overflow-hidden flex flex-col max-h-[90vh]">
             <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center bg-gray-50">
-              <h3 className="text-lg font-medium text-gray-900">Armar Nuevo Paquete</h3>
+              <h3 className="text-lg font-medium text-gray-900">Crear Marco de Evento</h3>
               <button onClick={() => setIsModalOpen(false)} className="text-gray-400 hover:text-gray-500 text-2xl">&times;</button>
             </div>
             
             <form onSubmit={handleSubmit} className="p-6 overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Columna Izquierda: Datos del Paquete */}
               <div className="space-y-4">
-                <h4 className="font-semibold text-gray-900 border-b pb-2">Información Principal</h4>
+                <h4 className="font-semibold text-gray-900 border-b pb-2">Información del Marco</h4>
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Nombre del Paquete</label>
@@ -287,7 +290,7 @@ export function PaquetesScreen() {
               {/* Columna Derecha: Composición */}
               <div className="space-y-4">
                 <h4 className="font-semibold text-gray-900 border-b pb-2 flex justify-between">
-                  <span>Composición del Paquete</span>
+                  <span>Composición del Marco</span>
                   <span className="text-sm font-normal text-gray-500">({compoSeleccionada.length} items)</span>
                 </h4>
                 
