@@ -2,6 +2,7 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
 import { LayoutDashboard, Box, Package, User, CalendarDays, ClipboardCheck, LogOut, HelpCircle } from "lucide-react";
+import { BarChart3 } from "lucide-react";
 
 export function ProveedorLayout() {
   const location = useLocation();
@@ -9,6 +10,7 @@ export function ProveedorLayout() {
 
   const navItems = [
     { name: "Dashboard", path: "/proveedor/dashboard", icon: <LayoutDashboard size={20} /> },
+    { name: "Analytics", path: "/proveedor/metricas", icon: <BarChart3 size={20} /> },
     { name: "Event Logistics", path: "/proveedor/operaciones", icon: <ClipboardCheck size={20} /> },
     { name: "Client Portal", path: "/proveedor/calendario", icon: <CalendarDays size={20} /> },
     { name: "Servicios y Adicionales", path: "/proveedor/inventario", icon: <Box size={20} /> },
